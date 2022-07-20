@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    #if( $security )
+    <h1>User: <span id="username">${security['name']}</span></h1>
+    <form action="/logout" method="post">
+        <input type="submit" value="Logout"/>
+    </form>
+    #else
+    <a href="/login">Login</a>
+    #end
+</body>
+
+</html>

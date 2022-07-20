@@ -1,0 +1,42 @@
+= Lab Instructions
+:icons: font
+
+== Files Of Interest
+- `build.gradle`
+- `src/main/resources/application.yml`
+- `src/main/java/example/BookController.java`
+- `src/test/groovy/example/BookControllerSpec.groovy`
+
+== Running The Tests
+
+The `test` task will run all of the tests:
+
+[source,bash]
+----
+./gradlew test
+----
+
+== Satisfying BookControllerSpec
+
+The project contains security dependencies in `build.gradle`.
+
+The `BookControllerSpec` is sending requests to the endpoint at
+`http://localhost:8080/books`. Requests are now unauthorized.
+
+[source, bash]
+----
+example.BookControllerSpec > /books endpoint is available for unauthenticated users FAILED
+    Expected no exception to be thrown, but got 'io.micronaut.http.client.exceptions.HttpClientResponseException'
+        at spock.lang.Specification.noExceptionThrown(Specification.java:118)
+        at example.BookControllerSpec./books endpoint is available for unauthenticated users(BookControllerSpec.groovy:36)
+
+        Caused by:
+        io.micronaut.http.client.exceptions.HttpClientResponseException: Unauthorized
+----
+
+NOTE: You should be able to make the `BookControllerSpec` tests pass
+by making changes to `BookController.java` only.  No other changes are required.
+
+Read about the https://micronaut-projects.github.io/micronaut-security/latest/guide/#secured[@Secured annotation].
+
+Also, try using `jakarta.annotation.security.PermitAll` annotation.

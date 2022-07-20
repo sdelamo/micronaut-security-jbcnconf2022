@@ -1,0 +1,12 @@
+micronaut:
+  application:
+    name: micronaut
+---
+micronaut:
+  security:
+    intercept-url-map:
+      -
+        http-method: GET
+        pattern: '/books'
+        access:
+          - 'isAnonymous()'

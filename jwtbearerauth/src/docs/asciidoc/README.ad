@@ -1,0 +1,37 @@
+= Lab Instructions
+:icons: font
+
+== Files Of Interest
+- `build.gradle`
+- `src/main/resources/application.yml`
+- `src/test/groovy/example/BookControllerSpec.groovy`
+- `src/main/java/example/CustomECSignatureGeneratorConfiguration.java`
+
+
+== About this project
+
+The project contains security dependencies in `build.gradle`.
+
+The project uses JPA persistence and it contains an `AuthenticationProvider` to authenticate users persisted in the database.
+
+
+== Running The Tests
+
+The `test` task will run all of the tests:
+
+[source,bash]
+----
+./gradlew test
+----
+
+== Satisfying Tests
+
+To fix the tests in this project, you will need to:
+
+Read about https://micronaut-projects.github.io/micronaut-security/latest/guide/#jwt[`security-jwt`]. The app already includes
+the necessary `security-jwt` dependencies.
+
+- Modify `application.yml` to enable JWT authentication. See https://micronaut-projects.github.io/micronaut-security/latest/guide/index.html#authenticationStrategy[Authentication Strategy]. Set `bearer` as an authentication strategy.
+- Modify `CustomECSignatureGeneratorConfiguration` add a name qualifier with value `generator`.
+- Modify `CustomECSignatureGeneratorConfiguration` and implement `ECSignatureGeneratorConfiguration`.
+- Modify `BookControllerSpec`, implement the TODOs.

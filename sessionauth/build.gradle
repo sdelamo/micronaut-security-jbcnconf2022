@@ -1,0 +1,72 @@
+plugins {
+    id("groovy") 
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("io.micronaut.application") version "3.5.0"
+    id "org.asciidoctor.jvm.convert" version "3.3.2"
+    id "com.github.erdi.webdriver-binaries" version "2.7"
+}
+
+version = "0.1"
+group = "example"
+
+repositories {
+    mavenCentral()
+}
+
+micronaut {
+    runtime("netty")
+    testRuntime("spock2")
+    processing {
+        incremental(true)
+        annotations("example.*")
+    }
+}
+
+dependencies {
+    annotationProcessor("io.micronaut:micronaut-http-validation")
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut:micronaut-runtime")
+    runtimeOnly("ch.qos.logback:logback-classic")
+    implementation("io.micronaut:micronaut-validation")
+
+    implementation("jakarta.annotation:jakarta.annotation-api")
+    implementation "io.micronaut.sql:micronaut-hibernate-jpa"
+    implementation "io.micronaut.sql:micronaut-jdbc-tomcat"
+    implementation "com.h2database:h2"
+
+    annotationProcessor("io.micronaut.security:micronaut-security-annotations")
+    implementation("io.micronaut.security:micronaut-security")
+    implementation("io.micronaut.security:micronaut-security-session")
+
+    implementation("io.micronaut.reactor:micronaut-reactor")
+
+    implementation("io.micronaut.views:micronaut-views-velocity")
+
+    implementation 'org.slf4j:jcl-over-slf4j:1.7.36'
+    implementation("org.springframework.security:spring-security-crypto:5.7.2")
+    testImplementation ("org.gebish:geb-spock:5.1") {
+        exclude group: 'org.codehaus.groovy', module: 'groovy-all'
+    }
+    testRuntimeOnly("org.seleniumhq.selenium:selenium-chrome-driver:3.141.59")
+    testRuntimeOnly("org.seleniumhq.selenium:selenium-firefox-driver:3.141.59")
+    testRuntimeOnly("org.seleniumhq.selenium:selenium-safari-driver:3.141.59")
+    testImplementation("org.seleniumhq.selenium:selenium-remote-driver:3.141.59")
+    testImplementation("org.seleniumhq.selenium:selenium-api:3.141.59")
+    testImplementation("org.seleniumhq.selenium:selenium-support:3.141.59")
+}
+
+webdriverBinaries {
+    chromedriver '96.0.4664.45'
+    geckodriver '0.30.0'
+}
+
+
+application {
+    mainClass.set("example.Application")
+}
+java {
+    sourceCompatibility = JavaVersion.toVersion("11")
+    targetCompatibility = JavaVersion.toVersion("11")
+}
+
+graalvmNative.toolchainDetection = false

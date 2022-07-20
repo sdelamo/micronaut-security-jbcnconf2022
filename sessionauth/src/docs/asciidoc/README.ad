@@ -1,0 +1,35 @@
+= Lab Instructions
+:icons: font
+
+== Files Of Interest
+- `build.gradle`
+- `src/main/resources/application.yml`
+- `src/main/resources/views/home.vm`
+- `src/main/resources/views/login.vm`
+- `src/test/groovy/example/AuthenticationSpec.groovy`
+
+== Running The Tests
+
+The `test` task will run all of the tests:
+
+[source,bash]
+----
+./gradlew test
+----
+
+== Satisfying Tests
+
+The project contains security dependencies in `build.gradle`.
+
+To fix the tests in this project, you will need to enable https://micronaut-projects.github.io/micronaut-security/latest/guide/index.html#session[Session Based Authentication].
+
+The project uses JPA persistence and it contains an `AuthenticationProvider` to authenticate users persisted in the database.
+
+The project contains a login form at GET `login` which submits credentials `username`, `password` via a POST request to `/login`.
+
+If the user is logged in, his username is displayed in GET `/`.
+
+To make the tests pass:
+
+- Add `security-session` dependencies in `build.gradle`.
+- Modify `application.yml` to enable session based authentication. See https://micronaut-projects.github.io/micronaut-security/latest/guide/index.html#authenticationStrategy[Authentication Strategy]

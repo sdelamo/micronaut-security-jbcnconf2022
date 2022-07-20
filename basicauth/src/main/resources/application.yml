@@ -1,0 +1,10 @@
+micronaut:
+  application:
+    name: micronaut
+---
+app:
+  username: sherlock # don't have this is config use ENV APP_USERNAME & APP_PASSWORD
+  password: elementary
+
+
+

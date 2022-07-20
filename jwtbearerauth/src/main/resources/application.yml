@@ -1,0 +1,28 @@
+micronaut:
+  application:
+    name: micronaut
+datasources:
+  default:
+    url: jdbc:h2:mem:devDb;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ''
+jpa:
+  default:
+    packages-to-scan:
+      - 'example.entities'
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: true
+app:
+  #ECKey ecJWK = new ECKeyGenerator(Curve.P_256).algorithm(JWSAlgorithm.ES256).keyID("123").generate()
+  #println "Public: " + ecJWK.toPublicJWK().toJSONObject().toJSONString()
+  #println "Private: " + ecJWK.toJSONObject().toJSONString()
+  public-key: '{"kty":"EC","crv":"P-256","kid":"123","x":"at8yWTRZMJbJ4hVuCx1USZFcj9MPtIj5SVZ4_OJ5UiU","y":"mdIs5riRSxq87vfVwW-svasuvsUJziL_b5X9KUk45EM","alg":"ES256"}'
+  private-key: '{"kty":"EC","d":"zIi7K_JfqvOIXLYx1spCxmReDc8Vdgswh-hFuaGhK40","crv":"P-256","kid":"123","x":"at8yWTRZMJbJ4hVuCx1USZFcj9MPtIj5SVZ4_OJ5UiU","y":"mdIs5riRSxq87vfVwW-svasuvsUJziL_b5X9KUk45EM","alg":"ES256"}'
+---
+micronaut:
+  security:
+    authentication: bearer

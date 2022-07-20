@@ -1,0 +1,46 @@
+= Lab Instructions
+:icons: font
+
+== Files Of Interest
+- `build.gradle`
+- `src/main/java/example/BookController.java`
+- `src/main/java/example/CustomAuthenticationProvider.java`
+- `src/test/groovy/example/BookControllerSpec.groovy`
+
+== Running The Tests
+
+The `test` task will run all of the tests:
+
+[source,bash]
+----
+./gradlew test
+----
+
+== Satisfying BookControllerSpec
+
+The project contains security dependencies in `build.gradle`.
+
+The project contains an authentication provider: `CustomAuthenticationProvider`.
+
+The `BookControllerSpec` is sending requests to the endpoint at
+`http://localhost:8080/books`. Requests are now unauthorized.
+
+[source, bash]
+----
+example.BookControllerSpec > /books endpoint is available for unauthenticated users FAILED
+    Expected no exception to be thrown, but got 'io.micronaut.http.client.exceptions.HttpClientResponseException'
+        at spock.lang.Specification.noExceptionThrown(Specification.java:118)
+        at example.BookControllerSpec./books endpoint is available for unauthenticated users(BookControllerSpec.groovy:36)
+
+        Caused by:
+        io.micronaut.http.client.exceptions.HttpClientResponseException: Unauthorized
+----
+
+Read about the https://micronaut-projects.github.io/micronaut-security/latest/guide/#basicAuth[Basic Auth].
+
+Read about https://micronaut-projects.github.io/micronaut-security/latest/guide/#authenticationProviders[Authentication Providers].
+
+To make the test pass:
+
+- Modify `BookControllerSpec`. Add an `Authorization` HTTP header to the request with value `Basic ` plus username and password separated by a colon encoded using Base64.
+- Modify the `CustomAuthenticationProvider`. if the credentials match (username: `sherlock`, password: `elementary`) use `AuthenticationResponse::success` method to return a successful authentication.

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<form method="post" action="/login">
+    <ol>
+        <li>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username"/>
+        </li>
+        <li>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"/>
+        </li>
+        <input type="submit" value="Login"/>
+    </ol>
+</form>
+
+</body>
+
+</html>
